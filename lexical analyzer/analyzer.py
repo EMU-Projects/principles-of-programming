@@ -13,7 +13,7 @@ rules = {
     "ID": "^[a-zA-Z]\w*$",
     "INTEGER": "^\-?[0-9]+$",
     "FLOAT": "^\-?[0-9]+\.[0-9]+$",
-    "RELOP": "^((>|<|=)?=|(>|<))$",
+    "RELOP": "^((>|<|=)=|(>|<))$",
 }
 
 # Symbol table to store non-ERRORED lexemes
@@ -53,14 +53,14 @@ def analyze():
     
     # input.dat contains our words/lexemes
     file = open("input.dat",'r')
-    for line in file.readlines():
-        for lexeme in line.split(" "):
-            # Here we print the token and its lexeme
-            token = lex(lexeme)
-            print("Token:",token)
-            print("Lexeme:",lexeme, end="\n\n")
-            if token != "ERROR":
-                symbol_table.append([token,lexeme])
+    for word in (" ".join(file.readlines())).split(" "):
+        # Here we print the token and its lexeme
+        lexeme = word.strip()
+        token = lex(lexeme)
+        print("Token:",token)
+        print("Lexeme:",lexeme, end="\n\n")
+        if token != "ERROR":
+            symbol_table.append([token,lexeme])
     file.close()
 
 i = "0"
